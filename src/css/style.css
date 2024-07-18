@@ -12,29 +12,32 @@ body, ul, li, h1, h2, h3, p, button {
 }
 
 .container {
-    display: grid;
-    grid-template-columns: 0.1fr 1fr 1fr;
     position: relative;
     margin: 0 auto;
     max-width: 1440px;
 }
 
-.dir-container{
+.dir-container, .server-container{
     display: flex;
-    flex-direction: column;
-    border: 1px solid #ff0101;
+    border: 1px solid #fff;
+    flex-wrap: wrap;
     width: fit-content;
 }
 
 .dir-container form{
     display: flex;
-    flex-direction: column;
 }
 
 .dirs {
-    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 200px;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.dirs button {
+    display: block;
 }
 
 .file-container {
@@ -47,7 +50,7 @@ body, ul, li, h1, h2, h3, p, button {
     border: 1px solid #fff;
 }
 
-.button-filedir {
+.button-filedir, button {
     padding: 1em;
     min-width: 100px;
     max-width: 100px;
@@ -64,12 +67,6 @@ body, ul, li, h1, h2, h3, p, button {
     height: 817px;
 }
 
-pre {
-    color: #fff
-}
-
-.iframe-container {
-    overflow-y: scroll;
-    overflow-y: scroll;
-    height: 817px;
+.iframe-container iframe{
+    height: 960px;
 }

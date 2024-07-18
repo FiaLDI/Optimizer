@@ -11,6 +11,57 @@
         
         <div class="container">
             <div class="filesystem-contain">
+                <div class="server-container">
+                    <form action="setpath/" method="post">
+                        <button>Setpath</button>
+                    </form>
+                    <form action="downloaddep/" method="post">
+                        <button>downloadDep</button>
+                    </form>
+                    <form action="startserver/" method="post">
+                        <button>start Server</button>
+                    </form>
+                    <form action="stopserver/" method="post">
+                        <button>stop Server</button>
+                    </form>
+                </div>
+                
+                <div class="dir-container">
+                    {{#if isServerStart}}
+                <form action="rootpath/" method="post">
+                    <button class="button-filedir" name="but1" value="root">.root.</button>
+                </form>
+                <form action="back/" method="post">
+                    <button class="button-filedir" name="but1" value="back">..</button>
+                </form>
+                <form class="dirs" action="changepath/" method="post">
+                
+                {{#each curDir}}
+                    <button class="button-filedir" name="but1" value="{{this}}">{{this}}</button>
+                {{/each}}
+                </form>
+                {{/if}}
+                <form class="dirs" action="selectpage/" method="post">
+                
+                {{#each curPages}}
+                    <button class="button-filedir" name="but1" value="{{this}}">{{this}}</button>
+                {{/each}}
+                </form>
+                </div>
+
+                <div class="cite-optimize-container">
+                    
+                </div>
+            
+            </div>
+        </div>
+        {{#if isHTML }}
+            <div class="iframe-container">
+                <iframe src="{{file}}" frameborder="0" width="100%" height="100%"></iframe>
+            </div>
+        {{/if}}
+        {{!-- <div class="container">
+            <div class="filesystem-contain">
                 <div class="dir-container">
                 <form action="rootpath/" method="post">
                     <button class="button-filedir" name="but1" value="root">.root.</button>
@@ -42,6 +93,39 @@
             </div>
             {{/if}}
         </div>
+        <div class="container">
+            <div class="filesystem-contain">
+                <div class="dir-container">
+                <form action="rootpath/" method="post">
+                    <button class="button-filedir" name="but1" value="root">.root.</button>
+                </form>
+                <form action="back/" method="post">
+                    <button class="button-filedir" name="but1" value="back">..</button>
+                </form>
+                <form class="dirs" action="changepath/" method="post">
+                
+                {{#each curDir}}
+                    <button class="button-filedir" name="but1" value="{{this}}">{{this}}</button>
+                {{/each}}
+                </form>
+            </div>
+            <div class="file-container">
+                <form action="openfile/" method="post">
+                {{#each curfile}}
+                    <button class="button-filedir" name="but1" value="{{this}}">{{this}}</button>
+                {{/each}}
+                </form>
+            </div>
+            </div>
+            <div class="text-container">
+                <pre>{{filetext}}</pre>
+            </div>
+            {{#if isHTML }}
+            <div class="iframe-container">
+                <iframe src="{{file}}" frameborder="0" width="100%" height="100%"></iframe>
+            </div>
+            {{/if}}
+        </div> --}}
     </main>
     
 </body>

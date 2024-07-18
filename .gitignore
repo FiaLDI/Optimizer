@@ -63,7 +63,7 @@ web_modules/
 .rts2_cache_es/
 .rts2_cache_umd/
 
-opt/pages/
+opt/pages/*
 
 # Optional REPL history
 .node_repl_history
