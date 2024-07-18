@@ -1,0 +1,1 @@
+const express = require('express');const process = require('process');const app = express();app.use('/', express.static('./'));app.listen(3001, ()=>console.log(process.pid));

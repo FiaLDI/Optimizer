@@ -1,0 +1,75 @@
+@font-face {
+    font-family: goldman_reg;
+    src: url(../font/Goldman-Regular.ttf);
+}
+body {
+    background-color: rgb(41, 48, 48);
+}
+
+body, ul, li, h1, h2, h3, p, button {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 0.1fr 1fr 1fr;
+    position: relative;
+    margin: 0 auto;
+    max-width: 1440px;
+}
+
+.dir-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ff0101;
+    width: fit-content;
+}
+
+.dir-container form{
+    display: flex;
+    flex-direction: column;
+}
+
+.dirs {
+    height: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.file-container {
+    width: fit-content;
+}
+
+.file-container form{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #fff;
+}
+
+.button-filedir {
+    padding: 1em;
+    min-width: 100px;
+    max-width: 100px;
+    border: none;
+    outline: none;
+}
+
+.text-container {
+    padding: 1em;
+    border: 1px solid #fff;
+    background-color: rgb(20, 20, 20);
+    overflow-y: scroll;
+    overflow-y: scroll;
+    height: 817px;
+}
+
+pre {
+    color: #fff
+}
+
+.iframe-container {
+    overflow-y: scroll;
+    overflow-y: scroll;
+    height: 817px;
+}

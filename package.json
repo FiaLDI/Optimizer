@@ -1,0 +1,23 @@
+{
+    "name": "frelance",
+    "version": "1.0.0",
+    "description": "",
+    "main": "App.js",
+    "scripts": {
+        "dev": "node .\\src\\App.js",
+        "start": "nodemon .\\src\\App.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cheerio": "^1.0.0-rc.12",
+        "consolidate": "^1.0.3",
+        "express": "^4.19.2",
+        "handlebars": "^4.7.8",
+        "request": "^2.88.2"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.4"
+    }
+}
