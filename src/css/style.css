@@ -70,3 +70,28 @@ body, ul, li, h1, h2, h3, p, button {
 .iframe-container iframe{
     height: 960px;
 }
+
+.Script-edit, .container-scripts {
+    display: flex;
+}
+
+.container-scripts {
+    margin: 0 auto;
+    max-width: 1440px;
+}
+
+.script_id {
+    padding: 1em;
+    background-color: #fff;
+    color: #000;
+    width: 1em;
+}
+
+#shower_script {
+    border: 1px solid #fff;
+    padding: 1em;
+    margin: 0;
+    width: 100%;
+    color: #fff;
+    overflow: scroll;
+}

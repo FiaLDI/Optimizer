@@ -18,5 +18,7 @@ router.post("/downloaddep", urlencodedParser, controller.downloadDep);
 router.post("/startserver", urlencodedParser, controller.startServer);
 router.post("/stopserver", urlencodedParser, controller.stopServer);
 router.post("/selectpage", urlencodedParser, controller.selectPage);
+router.post("/optimize", urlencodedParser, controller.selectScripts)
+router.post("/scriptedit", urlencodedParser, controller.scriptEdit)
 
 module.exports = router;

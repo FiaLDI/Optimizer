@@ -2,6 +2,8 @@ const path = require('path')
 const parseDir = require("./app/parserDir");
 const fs = require('fs')
 const child_process = require('child_process');
+const request = require('request');
+const cheerio = require('cheerio')
 const express = require('express');
 const process = require('process');
 const controller = new AbortController();
@@ -15,6 +17,12 @@ let RootPATH = __dirname;
 let curProcess;
 let isHTML = false;
 let configPath;
+let selectedScripts = [];
+
+fs.readFile(path.resolve(RootPATH, 'config', 'paths.json'), (err, data)=> {
+    configPath = JSON.parse(data)[0];
+    curPages = configPath.pages
+});
 
 exports.root = (req, res)=> {
     
@@ -26,7 +34,8 @@ exports.root = (req, res)=> {
         file: 'http://' +adressPage + curPage,
         isHTML: isHTML,
         curPages: curPages,
-        isServerStart: !isHTML
+        isServerStart: !isHTML,
+        selectedScripts: selectedScripts
     }, (err, html) => {
         if (err) return err
         fs.readFile(path.resolve(RootPATH, 'config', 'paths.json'), (err, data)=> {
@@ -197,7 +206,6 @@ exports.downloadDep = (req, res) => {
 }
 
 exports.startServer = (req, res) => {
-    console.log(configPath)
     isHTML = true;
     if (fs.existsSync(path.resolve(configPath.targetServerPath, 'node_modules')) &&
         fs.existsSync(path.resolve(configPath.targetServerPath, 'server.js')) && 
@@ -208,7 +216,6 @@ exports.startServer = (req, res) => {
                 timeout: 1000
             }, (err, stdout, stderr) => {
                 curProcess = stdout;
-                console.log(curProcess)
             })
             
     } 
@@ -229,6 +236,46 @@ exports.selectPage = (req, res) => {
     if(!req.body) return res.sendStatus(400);
     let curCommand = JSON.parse(JSON.stringify(req.body));
     curPage = String(curCommand.but1)
+    res.redirect('/')
+}
+
+exports.selectScripts = (req, res) => {
+    if(!req.body) return res.sendStatus(400);
+    let curCommand = JSON.parse(JSON.stringify(req.body));
+
+    console.log(curCommand)
+
+    fs.readFile(path.resolve(configPath.targetServerPath, 'pages', curPage, 'index.html'), 'utf8', (err, data) => {
+        data.replace(
+            /<script\s+src="[^"]*jquery[^"]*"><\/script>/g, 
+            '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.15/js/intlTelInput.min.js"></script>'
+        )
+        selectedScripts = data.match(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/g);
+        //console.log(selectedScripts)
+    })
+    res.redirect('/')
+}
+
+exports.scriptEdit = (req, res) => {
+    if(!req.body) return res.sendStatus(400);
+    let curCommand = JSON.parse(JSON.stringify(req.body));
+
+    if (curCommand.remove_script) {
+        fs.readFile(path.resolve(configPath.targetServerPath, 'pages', curPage, 'index.html'), 'utf8', (err, data) => {
+            let editeddata = String(data)
+
+            editeddata.replace(String(curCommand.remove_script), ' ')
+
+            console.log( editeddata.match(curCommand.remove_script))
+
+            fs.writeFile(path.resolve(configPath.targetServerPath, 'pages', curPage, 'index.html'), data=String(editeddata)  ,(err, data) => {
+                if (err) return err
+            })
+        })
+
+    }
+
+    console.log(curCommand)
 
     res.redirect('/')
 }
